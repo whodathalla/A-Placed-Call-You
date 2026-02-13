@@ -1,43 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For You BBYYYY!</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You BBYYYY!</title>
+  <link rel="stylesheet" href="style.css" />
 
-  <body>
-    <main>
-      <h1>For You BBYYYY!</h1>
+  <!-- preload hanya halaman pertama -->
+  <link rel="preload" as="image" href="VALENTINE BOOK png-01.webp">
+</head>
 
-      <!-- Image Reader -->
-      <section class="reader">
-        <img src="VALENTINE BOOK png-01.webp" loading="lazy" alt="page 1" />
-        <img src="VALENTINE BOOK png-02.webp" loading="lazy" alt="page 2" />
-        <img src="VALENTINE BOOK png-03.webp" loading="lazy" alt="page 3" />
-        <img src="VALENTINE BOOK png-04.webp" loading="lazy" alt="page 4" />
-      </section>
+<body>
 
-      <!-- Music -->
-      <section class="player">
-        <p>Play Music</p>
-        <audio id="bgMusic" controls>
-          <source src="LAGUNYE.mp3" type="audio/mpeg" />
-        </audio>
-      </section>
-    </main>
+<main>
+  <h1>For You BBYYYY!</h1>
 
-    <script>
-      const audio = document.getElementById("bgMusic");
+  <!-- Reader -->
+  <section class="reader">
 
-      document.addEventListener(
-        "click",
-        () => {
-          audio.play().catch(() => {});
-        },
-        { once: true }
-      );
-    </script>
-  </body>
+    <!-- first page load langsung -->
+    <img src="VALENTINE BOOK png-01.webp"
+         alt="page 1"
+         decoding="async">
+
+    <!-- berikutnya ditunda load -->
+    <img data-src="VALENTINE BOOK png-02.webp"
+         alt="page 2"
+         class="lazy">
+
+    <img data-src="VALENTINE BOOK png-03.webp"
+         alt="page 3"
+         class="lazy">
+
+    <img data-src="VALENTINE BOOK png-04.webp"
+         alt="page 4"
+         class="lazy">
+
+  </section>
+
+  <!-- Music -->
+  <section class="player">
+    <p>Play Music</p>
+    <audio id="bgMusic" controls preload="none">
+      <source src="LAGUNYE.mp3" type="audio/mpeg">
+    </audio>
+  </section>
+
+</main>
+
+<script>
+/* ===== Progressive Image Load (anti crash iOS) ===== */
+const lazyImages = document.querySelectorAll("img.lazy");
+
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const img = entry.target;
+    img.src = img.dataset.src;
+    img.decoding = "async";
+    obs.unobserve(img);
+  });
+}, {
+  rootMargin: "200px"
+});
+
+lazyImages.forEach(img => observer.observe(img));
+
+/* ===== Audio autoplay after first interaction ===== */
+const audio = document.getElementById("bgMusic");
+document.addEventListener("click", () => {
+  audio.play().catch(()=>{});
+}, { once: true });
+</script>
+
+</body>
 </html>
