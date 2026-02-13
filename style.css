@@ -1,0 +1,64 @@
+body {
+  background: #ad4156;
+  margin: 0;
+  padding: 18px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+main {
+  max-width: 760px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+/* ===== Reader ===== */
+
+.reader {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reader img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== Player ===== */
+
+.player {
+  margin-top: 28px;
+  background: #1e1e1e;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.player p {
+  margin: 0 0 8px 0;
+  font-weight: bold;
+}
+
+audio {
+  width: 100%;
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .reader {
+    gap: 14px;
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You BBYYYY!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>For You BBYYYY!</h1>
+
+      <!-- Image Reader -->
+      <section class="reader">
+        <img src="VALENTINE BOOK png-01.webp" loading="lazy" alt="page 1" />
+        <img src="VALENTINE BOOK png-02.webp" loading="lazy" alt="page 2" />
+        <img src="VALENTINE BOOK png-03.webp" loading="lazy" alt="page 3" />
+        <img src="VALENTINE BOOK png-04.webp" loading="lazy" alt="page 4" />
+      </section>
+
+      <!-- Music -->
+      <section class="player">
+        <p>Play Music</p>
+        <audio id="bgMusic" controls>
+          <source src="LAGUNYE.mp3" type="audio/mpeg" />
+        </audio>
+      </section>
+    </main>
+
+    <script>
+      const audio = document.getElementById("bgMusic");
+
+      document.addEventListener(
+        "click",
+        () => {
+          audio.play().catch(() => {});
+        },
+        { once: true }
+      );
+    </script>
+  </body>
+</html>
