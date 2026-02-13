@@ -1,19 +1,25 @@
+/* ===== Base ===== */
+
 body {
   background: #ad4156;
   margin: 0;
-  padding: 18px;
+  padding: 16px;
   font-family: Arial, sans-serif;
   text-align: center;
   color: white;
+
+  /* cegah text autoscale iOS */
+  -webkit-text-size-adjust: 100%;
 }
 
 main {
-  max-width: 760px;
+  max-width: 720px;
   margin: auto;
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin: 0 0 18px 0;
+  line-height: 1.2;
 }
 
 /* ===== Reader ===== */
@@ -21,44 +27,65 @@ h1 {
 .reader {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
+
+  /* bantu browser batasi area render */
+  contain: layout paint;
 }
 
 .reader img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
   background: white;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+
+  /* radius sedikit lebih kecil = lebih ringan */
+  border-radius: 14px;
+
+  /* shadow diringankan drastis */
+  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+
+  /* optimasi compositing */
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 /* ===== Player ===== */
 
 .player {
-  margin-top: 28px;
+  margin-top: 24px;
   background: #1e1e1e;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 16px;
+  border-radius: 12px;
 }
 
 .player p {
   margin: 0 0 8px 0;
   font-weight: bold;
+  letter-spacing: .3px;
 }
 
 audio {
   width: 100%;
+  display: block;
 }
 
-/* ===== Mobile ===== */
+/* ===== Mobile Tight ===== */
 
 @media (max-width: 600px) {
   body {
     padding: 12px;
   }
 
+  main {
+    max-width: 100%;
+  }
+
   .reader {
-    gap: 14px;
+    gap: 12px;
+  }
+
+  .reader img {
+    border-radius: 12px;
   }
 }
